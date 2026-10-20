@@ -46,6 +46,18 @@ image::maas-setup/img-maas-endpoints-1.png[AI asset endpoints]
 +
 image::maas-setup/img-maas-endpoints-2.png[AI asset endpoints]
 
+*URL 확인 방법 (WebTerminal 사용 시)*
+
+. OpenShift Console 상단의 *WebTerminal* 아이콘(`>_`)을 클릭하여 터미널을 엽니다.
+. 다음 명령어를 실행합니다. `test` 부분은 *본인의 모델이 배포된 네임스페이스*(예: `user-01`)로 바꿔서 실행합니다.
++
+[source,bash]
+----
+oc get llminferenceservice -n test -o jsonpath='{.items[0].status.url}{"\n"}'
+----
++
+image::maas-setup/img-maas-endpoints-3.png[WebTerminal에서 조회한 모델 URL]
+
 
 == 단계 5.2: MaaS 구독 생성 (관리자)
 
