@@ -36,8 +36,9 @@ https://maas.apps.<cluster-domain>/<namespace>/<model-name>/v1
 ----
 
 << URL 확인 방법 >>
-. AI 콘솔 사용 시, AI asset endpoints 선택 > view를 선택합니다.
-
+. AI 콘솔 사용 시
+. Gen AI studio > AI asset endpoints > 모델 선택 > view를 선택합니다.
+image::maas-setup/img-maas-endpoints.png[AI asset endpoints]
 
 
 == 단계 5.2: MaaS 구독 생성 (관리자)
