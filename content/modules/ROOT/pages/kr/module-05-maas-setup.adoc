@@ -35,9 +35,11 @@ MaaS를 설정하기 전에 모듈 3에서 배포한 모델이 실행 중인지 
 https://maas.apps.<cluster-domain>/<namespace>/<model-name>/v1
 ----
 
-<< URL 확인 방법 >>
-. AI 콘솔 사용 시
-. Gen AI studio > AI asset endpoints > 모델 선택 > view를 선택합니다.
+*URL 확인 방법 (AI 콘솔 사용 시)*
+
+. *Gen AI studio* > *AI asset endpoints*로 이동합니다.
+. 모델을 선택하고 *View*를 클릭합니다.
++
 image::maas-setup/img-maas-endpoints.png[AI asset endpoints]
 
 
