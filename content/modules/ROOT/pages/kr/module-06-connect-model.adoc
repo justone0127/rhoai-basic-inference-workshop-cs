@@ -18,7 +18,7 @@ echo "https://$(oc get route $(oc get route -n $NAMESPACE -o jsonpath='{.items[0
 
 *방법 B: 대시보드 UI*
 
-*AI hub* > *Models* > *Deployments*로 이동하여 본인의 프로젝트를 선택한 후, 모델 옆의 *Internal and external endpoint*를 클릭하여 외부 URL을 확인합니다. URL 끝에 `/v1`을 추가합니다.
+**AI hub** > **Models** > **Deployments**로 이동하여 본인의 프로젝트를 선택한 후, 모델 옆의 **Internal and external endpoint**를 클릭하여 외부 URL을 확인합니다. URL 끝에 ``/v1``을 추가합니다.
 
 image::model-deployment/img-model-deployment-endpoint.png[외부 URL이 표시된 추론 엔드포인트 팝업]
 
