@@ -9,9 +9,9 @@
 
 . 웹 브라우저를 엽니다 (Chrome 또는 Firefox 권장).
 . 강사가 제공한 *{productname-short} Dashboard URL*로 이동합니다.
-. 로그인 페이지로 리디렉션됩니다. 로그인 제공자로 *htpasswd*를 선택합니다.
+. 제공 받은 사용자 및 비밀번호를 입력합니다.
 +
-image::ocp-rhoai-portal/img-htpasswd-login.png[htpasswd 로그인 제공자 선택,600]
+image::ocp-rhoai-portal/img-user-login.png[로그인,600]
 . 배정받은 사용자명(예: `user01`)과 비밀번호를 입력합니다.
 . *Log in*을 클릭합니다.
 
