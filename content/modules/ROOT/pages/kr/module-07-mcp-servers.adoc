@@ -31,7 +31,7 @@ image::mcp-servers/img-mcp-servers-1.png[AI asset endpoints에 표시된 Curricu
 
 == 단계 7.2: 모델에 도구 호출(Tool Calling) 기능 활성화
 
-MCP 도구를 사용하려면 모델이 "어떤 도구를 어떤 인자로 호출할지"를 정해진 형식으로 응답할 수 있어야 합니다. 이를 *도구 호출(tool calling)* 이라고 하며, vLLM은 기본적으로 이 기능이 꺼져 있습니다. 따라서 모델 배포 시 다음 두 인자를 추가해야 합니다.
+MCP 도구를 사용하려면 모델이 "어떤 도구를 어떤 Arguements로 호출할지"를 정해진 형식으로 응답할 수 있어야 합니다. 이를 *도구 호출(tool calling)* 이라고 하며, vLLM은 기본적으로 이 기능이 꺼져 있습니다. 따라서 모델 배포 시 다음 두 Arguements를 추가해야 합니다.
 
 [cols="1,2",options="header"]
 |===
@@ -51,5 +51,13 @@ NOTE: 이 인자가 없으면 모델은 에러 없이 도구를 무시하고 텍
 +
 image::mcp-servers/img-mcp-servers-2.png[배포된 모델의 메뉴에서 Edit 선택]
 
+. *Next*를 눌러서 *3 Advanced settings*의 *Configuration parameters* 부분의 *Add custom runtime arguments*를 체크한 후, *두 개의 Argument*를 추가합니다.
+[source,bash]
+----
+--enable-auto-tool-choice
+--tool-call-parser=gemma4
+----
++
+image::mcp-servers/img-mcp-servers-3.png[Tool Calling 기능 활성화]
 
 
