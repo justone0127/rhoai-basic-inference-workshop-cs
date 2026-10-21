@@ -11,8 +11,22 @@
 * 학과 교육과정을 조회하는 MCP 도구가 연결된 에이전트
 * MCP 도구 사용 전후의 답변 차이에 대한 이해
 
-== 단계 7.1: MCP 서버 배포
+== 단계 7.1: 사전 배포된 MCP 서버 확인
+이번 실습에서 사용할 MCP 서버는 클러스터의 `mcp-servers` 프로젝트에 미리 배포되어 있습니다. 이 서버는 인공지능공학전공 교육과정 데이터(61개 과목)를 읽어 다음 세 가지 도구를 제공합니다.
 
+. 등록된 내용을 확인합니다.
++
+[source,bash]
+----
+oc get configmap gen-ai-aa-mcp-servers -n redhat-ods-applications \
+  -o jsonpath='{.data.Curriculum-MCP-Server}' | jq .
+----
++
+`url`이 앞에서 호출한 `MCP_URL`과 같은 주소인지 확인합니다.
+
+. 대시보드에서 *Gen AI studio* > *AI asset endpoints*로 이동하여, *MCP servers* 목록에 `Curriculum-MCP-Server`가 표시되는지 확인합니다.
++
+image::mcp-servers/img-mcp-servers-1.png[AI asset endpoints에 표시된 Curriculum-MCP-Server]
 
 
 == 단계 7.2: 모델에 도구 호출(Tool Calling) 기능 활성화
