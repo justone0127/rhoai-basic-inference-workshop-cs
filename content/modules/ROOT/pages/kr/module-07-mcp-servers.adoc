@@ -22,7 +22,7 @@ oc get configmap gen-ai-aa-mcp-servers -n redhat-ods-applications \
   -o jsonpath='{.data.Curriculum-MCP-Server}' | jq .
 ----
 +
-`url`이 앞에서 호출한 `MCP_URL`과 같은 주소인지 확인합니다.
+`url`이 앞에서 호출한 `MCP_URL`과 같은 주소인지 확인합니다. 아래 그림에서 view를 눌러서 확인할 수 있습니다.
 
 . 대시보드에서 *Gen AI studio* > *AI asset endpoints*로 이동하여, *MCP servers* 목록에 `Curriculum-MCP-Server`가 표시되는지 확인합니다.
 +
