@@ -27,9 +27,9 @@ image::ocp-rhoai-portal/img-rhoai-portal.png[OpenShift AI 대시보드]
 [TIP]
 ====
 OpenShift AI 대시보드와 OpenShift Console(이후 Web Terminal 사용 시 필요) 사이를 이동하려면, 우측 상단의 격자 아이콘(3x3 사각형)을 클릭한 후 이동할 애플리케이션을 선택합니다.
+====
 
 image::ocp-rhoai-portal/img-access-ocp.png[OpenShift AI와 OpenShift Console 간 전환]
-====
 
 == 단계 2.2: 새 프로젝트 생성
 
