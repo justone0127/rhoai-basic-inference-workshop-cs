@@ -1,23 +1,23 @@
 :imagesdir: ../../assets/images
 
 [#access-project-kr]
-= {productname-short} 접속 및 프로젝트 생성
+= OpenShift AI 접속 및 프로젝트 생성
 
-이 모듈에서는 {productname-long} 대시보드에 로그인하고, 모델 배포 및 실험을 위한 작업 공간으로 사용할 Data Science 프로젝트를 생성합니다.
+이 모듈에서는 Red Hat OpenShift AI 대시보드에 로그인하고, 모델 배포와 실험을 위한 작업 공간으로 사용할 Data Science 프로젝트를 생성합니다.
 
-== 단계 2.1: {productname-short} 로그인
+== 단계 2.1: OpenShift AI 로그인
 
-. 웹 브라우저를 엽니다 (Chrome 또는 Firefox 권장).
-. 강사가 제공한 *{productname-short} Dashboard URL*로 이동합니다.
-. 제공 받은 사용자 및 비밀번호를 입력합니다.
+. 웹 브라우저를 엽니다(Chrome 또는 Firefox 권장).
+. 강사가 제공한 **OpenShift AI 대시보드 URL**로 이동합니다.
+. 배정받은 사용자명(예: `user01`)과 비밀번호를 입력합니다.
 +
 image::ocp-rhoai-portal/img-user-login.png[로그인,600]
-. 배정받은 사용자명(예: `user01`)과 비밀번호를 입력합니다.
-. *Log in*을 클릭합니다.
 
-이제 좌측 사이드바에 Projects, AI hub, Gen AI studio 등의 메뉴 항목이 표시되는 *OpenShift AI Dashboard*가 나타납니다.
+. **Log in**을 클릭합니다.
 
-image::ocp-rhoai-portal/img-rhoai-portal.png[OpenShift AI Dashboard]
+로그인하면 좌측 사이드바에 **Projects**, **AI hub**, **Gen AI studio** 등의 메뉴가 있는 OpenShift AI 대시보드가 표시됩니다.
+
+image::ocp-rhoai-portal/img-rhoai-portal.png[OpenShift AI 대시보드]
 
 [TIP]
 ====
@@ -26,7 +26,7 @@ image::ocp-rhoai-portal/img-rhoai-portal.png[OpenShift AI Dashboard]
 
 [TIP]
 ====
-*OpenShift AI Dashboard*와 *OpenShift Console* (이후 Web Terminal에서 필요) 간 전환하려면 우측 상단의 격자 아이콘(3x3 사각형)을 클릭한 후 대상 애플리케이션을 선택합니다.
+OpenShift AI 대시보드와 OpenShift Console(이후 Web Terminal 사용 시 필요) 사이를 이동하려면, 우측 상단의 격자 아이콘(3x3 사각형)을 클릭한 후 이동할 애플리케이션을 선택합니다.
 
 image::ocp-rhoai-portal/img-access-ocp.png[OpenShift AI와 OpenShift Console 간 전환]
 ====
@@ -35,23 +35,23 @@ image::ocp-rhoai-portal/img-access-ocp.png[OpenShift AI와 OpenShift Console 간
 
 프로젝트(Kubernetes 네임스페이스)는 모델 배포, Workbench 생성, 실험 수행을 위한 작업 공간입니다.
 
-. 좌측 사이드바에서 *Projects*를 클릭합니다.
-
-. 우측 상단의 *Create project* 버튼을 클릭합니다.
-
-. 양식을 작성합니다:
+. 좌측 사이드바에서 **Projects**를 클릭합니다.
+. 우측 상단의 **Create project** 버튼을 클릭합니다.
+. 양식을 작성합니다.
 +
 [cols="1,2",options="header"]
 |===
 | 필드 | 입력 내용
 
-| *Name*
+| **Name**
 | `user-XX` (배정받은 번호를 사용합니다. 예: `user-05`)
 
-| *Description*
+| **Description**
 | `My workshop project` (선택 사항)
 |===
 
-. *Create*를 클릭합니다.
+. **Create**를 클릭합니다.
 
-이제 Overview, Workbenches, Pipelines, Deployments, Connections 등의 탭이 있는 프로젝트 `user-XX`가 표시됩니다.
+프로젝트 ``user-XX``가 생성되고, **Overview**, **Workbenches**, **Pipelines**, **Deployments**, **Connections** 등의 탭이 표시됩니다.
+
+NOTE: 여기서 만든 프로젝트 이름(``user-XX``)은 이후 모듈에서 네임스페이스로 계속 사용합니다. 정확히 기억해 두세요.
