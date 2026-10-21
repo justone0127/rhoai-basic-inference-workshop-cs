@@ -1,7 +1,7 @@
 ---
 site:
   title: Basic Inferencing on Red Hat AI
-  url: https://jingggg-wenn.github.io/rhoai-basic-inference-workshop
+  url: https://github.com/justone0127/rhoai-basic-inference-workshop-cs
   start_page: modules::index.adoc
 
 content:
