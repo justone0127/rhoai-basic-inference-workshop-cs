@@ -1,6 +1,6 @@
 :imagesdir: ../../assets/images
 
-[#connect-model-kr]
+[#mcp-servers-kr]
 = Playground 및 MCP 연결
 
 이 모듈에서는 앞에서 MaaS로 서비스한 모델을 OpenShift AI에서 제공하는 Playground에 연결하고, 학과 교육과정을 조회하는 MCP(Model Context Protocol) 서버를 도구로 추가합니다. 모델이 학습하지 않은 정보도 외부 도구를 호출해 정확하게 답하는 과정을 직접 확인합니다.
@@ -12,7 +12,14 @@
 * MCP 도구 사용 전후의 답변 차이에 대한 이해
 
 == 단계 7.1: 사전 배포된 MCP 서버 확인
-이번 실습에서 사용할 MCP 서버는 클러스터의 `mcp-servers` 프로젝트에 미리 배포되어 있습니다. 이 서버는 인공지능공학전공 교육과정 데이터(61개 과목)를 읽어 다음 세 가지 도구를 제공합니다.
+
+이번 실습에서 사용할 MCP 서버는 클러스터의 `mcp-servers` 프로젝트에 미리 배포되어 있습니다. 이 서버는 인공지능공학전공 교육과정 데이터(61개 과목)를 읽어 다음과 같은 도구를 제공합니다.
+
+* `list_courses`: 학년, 학기, 이수구분 등의 조건으로 과목 목록을 조회합니다.
+* `credit_summary`: 조건에 맞는 과목의 학점 합계를 계산합니다.
+// TODO: 세 번째 도구 이름과 설명을 추가하세요.
+
+MCP 서버는 클러스터 관리자가 `redhat-ods-applications` 네임스페이스의 `gen-ai-aa-mcp-servers` ConfigMap에 등록해 두었습니다.
 
 . 등록된 내용을 확인합니다.
 +
@@ -22,16 +29,15 @@ oc get configmap gen-ai-aa-mcp-servers -n redhat-ods-applications \
   -o jsonpath='{.data.Curriculum-MCP-Server}' | jq .
 ----
 +
-`url`이 앞에서 호출한 `MCP_URL`과 같은 주소인지 확인합니다. 아래 그림에서 view를 눌러서 확인할 수 있습니다.
+출력된 ``url``이 ``mcp-servers`` 프로젝트의 ``curriculum-mcp`` 서비스 주소(``http://curriculum-mcp.mcp-servers.svc.cluster.local:8000/mcp``)인지 확인합니다.
 
-. 대시보드에서 *Gen AI studio* > *AI asset endpoints*로 이동하여, *MCP servers* 목록에 `Curriculum-MCP-Server`가 표시되는지 확인합니다.
+. 대시보드에서 **Gen AI studio** > **AI asset endpoints**로 이동하여, **MCP servers** 목록에 ``Curriculum-MCP-Server``가 표시되는지 확인합니다. 항목의 **View**를 클릭하면 등록된 URL을 확인할 수 있습니다.
 +
 image::mcp-servers/img-mcp-servers-1.png[AI asset endpoints에 표시된 Curriculum-MCP-Server]
 
-
 == 단계 7.2: 모델에 도구 호출(Tool Calling) 기능 활성화
 
-MCP 도구를 사용하려면 모델이 "어떤 도구를 어떤 Arguements로 호출할지"를 정해진 형식으로 응답할 수 있어야 합니다. 이를 *도구 호출(tool calling)* 이라고 하며, vLLM은 기본적으로 이 기능이 꺼져 있습니다. 따라서 모델 배포 시 다음 두 Arguements를 추가해야 합니다.
+MCP 도구를 사용하려면 모델이 "어떤 도구를 어떤 인자로 호출할지"를 정해진 형식으로 응답할 수 있어야 합니다. 이를 **도구 호출(tool calling)**이라고 하며, vLLM은 기본적으로 이 기능이 꺼져 있습니다. 따라서 모델 배포 시 다음 두 인자를 추가해야 합니다.
 
 [cols="1,2",options="header"]
 |===
@@ -46,12 +52,12 @@ MCP 도구를 사용하려면 모델이 "어떤 도구를 어떤 Arguements로 �
 
 NOTE: 이 인자가 없으면 모델은 에러 없이 도구를 무시하고 텍스트로만 답합니다. 도구가 호출되지 않는다면 가장 먼저 이 설정을 확인하세요.
 
-. 대시보드에서 *AI hub* > *Models* > *Deployments*로 이동하고 본인의 프로젝트를 선택합니다.
-. 배포된 모델의 오른쪽 메뉴(⋮)를 클릭하고 *Edit*을 선택합니다.
+. 대시보드에서 **AI hub** > **Models** > **Deployments**로 이동하고 본인의 프로젝트를 선택합니다.
+. 배포된 모델의 오른쪽 메뉴(⋮)를 클릭하고 **Edit**을 선택합니다.
 +
 image::mcp-servers/img-mcp-servers-2.png[배포된 모델의 메뉴에서 Edit 선택]
 
-. *Next*를 눌러서 *3 Advanced settings*의 *Configuration parameters* 부분의 *Add custom runtime arguments*를 체크한 후, *두 개의 Argument*를 추가합니다.
+. **Next**를 눌러 **3 Advanced settings** 단계로 이동한 후, **Configuration parameters** 영역에서 **Add custom runtime arguments**를 체크하고 다음 두 인자를 추가합니다.
 +
 [source,text]
 ----
@@ -61,11 +67,13 @@ image::mcp-servers/img-mcp-servers-2.png[배포된 모델의 메뉴에서 Edit �
 +
 image::mcp-servers/img-mcp-servers-3.png[Tool Calling 기능 활성화]
 
-. 모델 재 배포가 완료될 때까지 기다립니다. 다음과 같이 Running 상태로 표시되면 다음 단계를 진행할 수 있습니다.
+. 모델 재배포가 완료될 때까지 기다립니다. 다음과 같이 **Running** 상태로 표시되면 다음 단계를 진행할 수 있습니다.
++
 image::mcp-servers/img-mcp-servers-4.png[모델 배포 확인]
 
-== 단계 7.3: Plyground 실행
-Playground는 OpenShift AI에서 제공하는 대화형 테스트 환경으로, 배포한 모델과 채팅하고 MCP 서버 같은 외부 도구를 연결해 볼 수 있습니다. 이 단계에서는 먼저 *도구 없이* 모델과 대화한 뒤, *MCP 서버를 연결*하여 같은 질문의 답변이 어떻게 달라지는지 비교합니다.
+== 단계 7.3: Playground 실행
+
+Playground는 OpenShift AI에서 제공하는 대화형 테스트 환경으로, 배포한 모델과 채팅하고 MCP 서버 같은 외부 도구를 연결해 볼 수 있습니다. 이 단계에서는 먼저 **도구 없이** 모델과 대화한 뒤, **MCP 서버를 연결**하여 같은 질문의 답변이 어떻게 달라지는지 비교합니다.
 
 [source,text]
 ----
@@ -73,32 +81,33 @@ Playground는 OpenShift AI에서 제공하는 대화형 테스트 환경으로, 
                      │  ① 질문 + MCP 도구 목록 전달
                      ▼
                   모델 (Gemma)
-                     │  ② "list_courses(grade=3, category='전공필수')를 호출해 줘"
+                     │  ② "list_courses(grade=1, semester=1, category='전공필수')를 호출해 줘"
                      ▼
                  Playground ──③ 도구 실행──▶ MCP 서버 (curriculum-mcp)
                      │  ④ 실행 결과를 모델에 다시 전달
                      ▼
                   모델 ──⑤ 결과를 근거로 최종 답변 생성──▶ 사용자
 ----
- 
+
 === Playground 생성
-. OpenShift AI Console 대시보드에서 *Gen AI studio* > *Playground*로 이동합니다.
+
+. OpenShift AI 대시보드에서 **Gen AI studio** > **Playground**로 이동합니다.
 . 상단에서 모델을 배포한 프로젝트를 선택합니다.
-. Playground가 아직 없다면 *Create playground*를 클릭합니다.
+. Playground가 아직 없다면 **Create playground**를 클릭합니다.
 +
 image::mcp-servers/img-playground-1.png[Playground 생성 화면]
 
-. 사용할 모델로 앞에서 배포한 모델(예: `RedHatAI/gemma-4-E4B-it`)을 선택하고 *Create*를 클릭합니다.
+. 사용할 모델로 앞에서 배포한 모델(예: `RedHatAI/gemma-4-E4B-it`)을 선택하고 **Create**를 클릭합니다.
 +
 image::mcp-servers/img-playground-2.png[Playground에 사용할 모델을 선택하는 화면]
 
 . Playground가 준비될 때까지 기다립니다. 처음 생성할 때는 관련 구성 요소가 프로젝트에 배포되므로 1~2분 정도 걸릴 수 있습니다.
 +
-NOTE: 생성 중에 화면이 계속 로딩 상태라면 WebTerminal에서 `oc get pods -n <프로젝트>`를 실행하여 `lsd-genai-playground`로 시작하는 Pod가 `Running`인지 확인합니다.
+NOTE: 생성 중에 화면이 계속 로딩 상태라면 Web Terminal에서 ``oc get pods -n <프로젝트>``를 실행하여 ``lsd-genai-playground``로 시작하는 Pod가 ``Running``인지 확인합니다.
 
 === 일반 채팅 테스트 (MCP 없이)
- 
-. 오른쪽 설정 패널에서 MCP 서버가 *모두 비활성화*되어 있는지 확인합니다.
+
+. 오른쪽 설정 패널에서 MCP 서버가 **모두 비활성화**되어 있는지 확인합니다.
 . 채팅 입력창에 간단한 인사를 입력하여 모델이 정상적으로 응답하는지 확인합니다.
 +
 [source,text]
@@ -115,16 +124,17 @@ image::mcp-servers/img-playground-3.png[Playground에서 모델과 일반 채팅
 조선대학교 AI 소프트웨어학부 1학년 1학기 필수 전공을 알려줘
 ----
 +
-모델은 이 학과의 교육과정을 학습하지 않았기 때문에 *모른다고 답하거나, 실제와 다른 과목을 그럴듯하게 지어냅니다*(환각). 모델의 답변을 기록해 둡니다.
+모델은 이 학과의 교육과정을 학습하지 않았기 때문에 **모른다고 답하거나, 실제와 다른 과목을 그럴듯하게 지어냅니다**(환각). 모델의 답변을 기록해 둡니다.
 +
-image::mcp-servers/img-playground-3-1.png[Playground에서 모델과 일반 채팅을 하는 화면]
+image::mcp-servers/img-playground-3-1.png[MCP 없이 교육과정을 질문한 결과]
 
 === MCP 서버 연결
 
-. 오른쪽 설정 패널의 *MCP servers* 영역에서 `Curriculum-MCP-Server`를 찾아 활성화하고, 저장을 누릅니다.
+. 오른쪽 설정 패널의 **MCP servers** 영역에서 ``Curriculum-MCP-Server``를 찾아 활성화합니다.
 +
 image::mcp-servers/img-playground-4.png[MCP Server 활성화]
 
+. **저장**을 클릭합니다.
 +
 image::mcp-servers/img-playground-5.png[MCP Server 저장]
 
@@ -136,63 +146,61 @@ image::mcp-servers/img-playground-5.png[MCP Server 저장]
 ----
 조선대학교 AI 소프트웨어학부 1학년 1학기 필수 전공을 알려줘
 ----
-. 이번에는 모델이 `list_courses` 도구를 호출하고, 그 결과를 근거로 답합니다. 응답 화면에서 도구 호출 내역을 펼쳐 *어떤 도구가 어떤 인자로 호출되었는지* 확인합니다.
+
+. 이번에는 모델이 ``list_courses`` 도구를 호출하고, 그 결과를 근거로 답합니다. 응답 화면에서 도구 호출 내역을 펼쳐 **어떤 도구가 어떤 인자로 호출되었는지** 확인합니다.
 +
 [source,text]
 ----
 도구: list_courses
-인자: {"grade": 3, "category": "전공필수"}
+인자: {"grade": 1, "semester": 1, "category": "전공필수"}
 ----
 +
 최종 답변에 관련 전공 과목, 학점, 시간이 나오면 성공입니다.
 +
 image::mcp-servers/img-playground-6.png[MCP Server를 이용한 채팅 결과]
 
-. 학과 커리큘럼에 관한 질문을 더 해봅니다.
+. 학과 교육과정에 관한 질문을 더 해 봅니다.
 +
 [source,text]
 ----
 오픈소스 AI플랫폼 엔지니어링은 몇 학년 몇 학기 과목이야?
 ----
++
 image::mcp-servers/img-playground-7.png[MCP Server를 이용한 채팅 결과 2]
-
 +
 [source,text]
 ----
 딥러닝 관련 과목을 학년 순서대로 알려줘
 ----
++
 image::mcp-servers/img-playground-8.png[MCP Server를 이용한 채팅 결과 3]
-
 +
 [source,text]
 ----
 졸업하려면 몇 학점이 필요해?
 ----
++
 image::mcp-servers/img-playground-9.png[MCP Server를 이용한 채팅 결과 4]
-
 
 TIP: 마지막 질문은 일부러 데이터에 없는 정보를 묻는 질문입니다. 모델이 "데이터에 없다"고 답하는지, 아니면 개설 과목의 학점 합계를 졸업 학점으로 착각해 답하는지 확인해 보세요.
 
 === 결과 비교
- 
+
 [cols="1,2,2",options="header"]
 |===
 | 구분 | MCP 없이 | MCP 연결 후
- 
+
 | 답변 근거
 | 모델이 학습한 일반 지식
 | MCP 도구가 조회한 실제 교육과정 데이터
- 
+
 | 정확도
 | 모르거나 사실과 다른 내용을 지어냄
 | 실제 데이터와 일치
- 
+
 | 계산이 필요한 질문
 | 모델이 추측하거나 계산을 틀리기 쉬움
 | 도구(`credit_summary`)가 계산한 정확한 값을 사용
 |===
- 
-이처럼 모델은 필요할 때 스스로 도구를 선택하고, 도구가 돌려준 결과를 근거로 답합니다. 이것이 *Agentic AI*의 기본 동작 방식입니다.
 
-
-
+이처럼 모델은 필요할 때 스스로 도구를 선택하고, 도구가 돌려준 결과를 근거로 답합니다. 이것이 **Agentic AI**의 기본 동작 방식입니다.
