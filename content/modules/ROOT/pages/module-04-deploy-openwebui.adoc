@@ -16,7 +16,7 @@ This gives you an in-browser terminal with `oc`, `git`, and `sed` pre-installed.
 
 [source,sh,role="execute"]
 ----
-git clone https://github.com/jingggg-wenn/rhoai-basic-inference-workshop.git
+git clone https://github.com/justone0127/rhoai-basic-inference-workshop-cs.git
 ----
 
 [source,sh,role="execute"]
