@@ -61,4 +61,9 @@ image::mcp-servers/img-mcp-servers-2.png[배포된 모델의 메뉴에서 Edit �
 +
 image::mcp-servers/img-mcp-servers-3.png[Tool Calling 기능 활성화]
 
+. 모델 재 배포가 완료될 때까지 기다립니다. 다음과 같이 Running 상태로 표시되면 다음 단계를 진행할 수 있습니다.
+image::mcp-servers/img-mcp-servers-4.png[모델 배포 확인]
+
+
+
 
