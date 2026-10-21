@@ -25,7 +25,6 @@ Basic Inferencing 워크숍의 실습 과정을 모두 완료하셨습니다.
 
 | 6 - 모델 연결
 | MaaS API 키를 사용하여 모델 엔드포인트를 Open WebUI에 연결하고 채팅 기반 추론을 테스트했습니다
-|===
 
 | 7 - Playground 및 MCP 연결
 | Gen AI Studio Playground에서 배포한 모델과 MCP 서버를 연결하고, 모델이 MCP 도구를 호출해 외부 데이터를 조회하는 에이전트 방식의 추론을 테스트했습니다.
