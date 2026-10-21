@@ -1,0 +1,17 @@
+* xref:module-01-introduction.adoc#introduction[Module 1: Introduction]
+* xref:module-02-access-create-project.adoc#access-project[Module 2: Access RHOAI and Create Your Project]
+* xref:module-03-deploy-model.adoc#deploy-model[Module 3: Deploy a Model]
+* xref:module-04-deploy-openwebui.adoc#deploy-openwebui[Module 4: Deploy Open WebUI]
+* xref:module-05-maas-setup.adoc#maas-setup[Module 5: Set Up MaaS and API Key]
+* xref:module-06-connect-model.adoc#connect-model[Module 6: Connect Model to Open WebUI]
+* xref:module-07-closing.adoc#closing[Closing and Resources]
+
+.한국어 (Korean)
+* xref:kr/module-01-introduction.adoc#introduction-kr[1: 소개]
+* xref:kr/module-02-access-create-project.adoc#access-project-kr[2: OpenShift AI 접속 및 프로젝트 생성]
+* xref:kr/module-03-deploy-model.adoc#deploy-model-kr[3: 모델 배포]
+* xref:kr/module-04-deploy-openwebui.adoc#deploy-openwebui-kr[4: Open WebUI 배포]
+* xref:kr/module-05-maas-setup.adoc#maas-setup-kr[5: MaaS 및 API 키 설정]
+* xref:kr/module-06-connect-model.adoc#connect-model-kr[6: Open WebUI에 모델 연결]
+* xref:kr/module-07-mcp-servers.adoc#connect-model-kr[7: Playground 및 MCP 연결]
+* xref:kr/module-08-closing.adoc#closing-kr[마무리 및 참고 자료]
