@@ -13,5 +13,5 @@
 * xref:kr/module-04-deploy-openwebui.adoc#deploy-openwebui-kr[4: Open WebUI 배포]
 * xref:kr/module-05-maas-setup.adoc#maas-setup-kr[5: MaaS 및 API 키 설정]
 * xref:kr/module-06-connect-model.adoc#connect-model-kr[6: Open WebUI에 모델 연결]
-* xref:kr/module-07-mcp-servers.adoc#connect-model-kr[7: MCP 도구 사용]
+* xref:kr/module-07-mcp-servers.adoc#connect-model-kr[7: Playground 및 MCP 연결]
 * xref:kr/module-08-closing.adoc#closing-kr[마무리 및 참고 자료]
