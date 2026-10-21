@@ -3,7 +3,7 @@
 [#connect-model-kr]
 = Playground 및 MCP 연결
 
-이 모듈에서는 앞에서 MaaS로 서비스한 모델을 {productname-short}의 Playground에 연결하고, 학과 교육과정을 조회하는 MCP(Model Context Protocol) 서버를 도구로 추가합니다. 모델이 학습하지 않은 정보도 외부 도구를 호출해 정확하게 답하는 과정을 직접 확인합니다.
+이 모듈에서는 앞에서 MaaS로 서비스한 모델을 Playground에 연결하고, 학과 교육과정을 조회하는 MCP(Model Context Protocol) 서버를 도구로 추가합니다. 모델이 학습하지 않은 정보도 외부 도구를 호출해 정확하게 답하는 과정을 직접 확인합니다.
 
 이 모듈을 완료하면 다음을 갖추게 됩니다:
 
