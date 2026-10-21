@@ -15,14 +15,14 @@ image::ocp-rhoai-portal/img-user-login.png[로그인,600]
 
 . **Log in**을 클릭합니다.
 
-로그인하면 좌측 사이드바에 **Projects**, **AI hub**, **Gen AI studio** 등의 메뉴가 있는 OpenShift AI 대시보드가 표시됩니다.
-
-image::ocp-rhoai-portal/img-rhoai-portal.png[OpenShift AI 대시보드]
-
 [TIP]
 ====
 로그인이 되지 않는 경우, 강사에게 사용자명과 비밀번호를 다시 확인하십시오.
 ====
+
+로그인하면 좌측 사이드바에 **Projects**, **AI hub**, **Gen AI studio** 등의 메뉴가 있는 OpenShift AI 대시보드가 표시됩니다.
+
+image::ocp-rhoai-portal/img-rhoai-portal.png[OpenShift AI 대시보드]
 
 [TIP]
 ====
