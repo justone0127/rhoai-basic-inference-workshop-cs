@@ -24,9 +24,9 @@
 
 MaaS를 설정하기 전에 모듈 3에서 배포한 모델이 실행 중인지 확인합니다:
 
-. {productname-short} 대시보드에서 *AI hub* > *Models* > *Deployments*로 이동합니다.
-. 본인의 프로젝트를 선택하고 모델이 *Ready* (녹색 상태)인지 확인합니다.
-. *Internal and external endpoint*를 클릭하여 외부 MaaS URL이 사용 가능한지 확인합니다.
+. OpenShift AI 대시보드에서 **AI hub** > **Models** > **Deployments**로 이동합니다.
+. 본인의 프로젝트를 선택하고 모델 상태가 **Ready**(녹색)인지 확인합니다.
+. **Internal and external endpoint**를 클릭하여 외부 MaaS URL이 표시되는지 확인합니다.
 
 외부 URL은 다음 형식을 따릅니다:
 
