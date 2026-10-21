@@ -37,7 +37,7 @@ https://maas.apps.<cluster-domain>/<namespace>/<model-name>/v1
 
 *URL 확인 방법 (AI 콘솔 사용 시)*
 
-. *AI Hub* > *Models* > *Deployment* > *모델 확인* > *Internal and external endpoint*를 선택합니다.
+. **AI hub** > **Models** > **Deployments** > 모델 확인 > **Internal and external endpoint**를 선택합니다.
 . 모델의 External API endpoint URL을 확인합니다.
 +
 image::maas-setup/img-maas-endpoints-0.png[AI asset endpoints]
