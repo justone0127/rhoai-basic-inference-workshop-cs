@@ -42,7 +42,7 @@ echo "$(oc get llminferenceservice <모델명> -n $NAMESPACE -o jsonpath='{.stat
 
 image::model-deployment/img-model-deployment-endpoint.png[외부 URL이 표시된 추론 엔드포인트 팝업]
 
-. 이 URL을 복사하고, 다음 단계에서 붙여넣기 합니다.
+이 URL을 복사하고, 다음 단계에서 붙여넣기 합니다.
 
 == 단계 6.2: Open WebUI에서 연결 추가
 
