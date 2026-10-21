@@ -35,7 +35,7 @@ NOTE: 이 인자가 없으면 모델은 에러 없이 도구를 무시하고 텍
 . 대시보드에서 *AI hub* > *Models* > *Deployments*로 이동하고 본인의 프로젝트를 선택합니다.
 . 배포된 모델의 오른쪽 메뉴(⋮)를 클릭하고 *Edit*을 선택합니다.
 +
-image::mcp-curriculum/img-model-edit.png[배포된 모델의 메뉴에서 Edit 선택]
+image::mcp-curriculum/img-mcp-servers-2.png[배포된 모델의 메뉴에서 Edit 선택]
 
 
 
