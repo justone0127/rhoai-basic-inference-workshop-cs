@@ -1,16 +1,16 @@
 :imagesdir: ../../assets/images
 
 [#deploy-openwebui-kr]
-= Open WebUI 배포 및 모델 연결
+= Open WebUI 배포
 
-이 모듈에서는 ChatGPT와 유사한 자체 호스팅 채팅 인터페이스인 Open WebUI를 배포하고 모델에 연결합니다. 모든 명령줄 작업은 {ocp-short} Web Terminal을 사용합니다.
+이 모듈에서는 ChatGPT와 유사한 자체 호스팅 채팅 인터페이스인 Open WebUI를 배포합니다. 모든 명령줄 작업은 OpenShift Web Terminal을 사용합니다.
 
 == 단계 4.1: Web Terminal 열기
 
-. {productname-short} 대시보드 우측 상단의 격자 아이콘(3x3 사각형)을 클릭하여 *{ocp-short} Console*에 접속합니다.
-. {ocp-short} Console 우측 상단의 *>_* 아이콘을 클릭하여 Web Terminal을 엽니다.
+. OpenShift AI 대시보드 우측 상단의 격자 아이콘(3x3 사각형)을 클릭하여 **OpenShift Console**에 접속합니다.
+. OpenShift Console 우측 상단의 **>_** 아이콘을 클릭하여 Web Terminal을 엽니다.
 
-브라우저 내 터미널이 제공되며, `oc`, `git`, `sed`가 사전 설치되어 있습니다. 로컬 CLI 도구는 필요하지 않습니다.
+브라우저 안에서 동작하는 터미널이 열리며, `oc`, `git`, `sed`가 미리 설치되어 있습니다. 로컬 PC에 CLI 도구를 설치할 필요는 없습니다.
 
 == 단계 4.2: 워크숍 리포지토리 복제
 
@@ -21,12 +21,12 @@ git clone https://github.com/justone0127/rhoai-basic-inference-workshop-cs.git
 
 [source,sh,role="execute"]
 ----
-cd rhoai-basic-inference-workshop
+cd rhoai-basic-inference-workshop-cs
 ----
 
 == 단계 4.3: 환경 변수 설정
 
-본인의 네임스페이스를 설정합니다 (예: `user-05` 또는 `admin-02`):
+본인의 네임스페이스를 설정합니다. `user-XX` 부분을 본인의 네임스페이스로 변경한 후 실행합니다(예: `user-05` 또는 `admin-02`).
 
 [source,sh,role="execute"]
 ----
@@ -35,27 +35,29 @@ export NAMESPACE=user-XX
 
 == 단계 4.4: Open WebUI 배포
 
-Open WebUI는 네임스페이스에 다음 리소스를 배포합니다:
+Open WebUI는 네임스페이스에 다음 리소스를 배포합니다.
 
-* *ConfigMap* -- Open WebUI의 기본 설정
-* *PersistentVolumeClaim* -- Open WebUI 데이터용 2Gi 스토리지
-* *Deployment* -- Open WebUI 컨테이너
-* *Service* -- 포트 8080의 클러스터 내부 접근
-* *Route* -- 브라우저 접근을 위한 외부 HTTPS URL
+* **ConfigMap**: Open WebUI의 기본 설정
+* **PersistentVolumeClaim**: Open WebUI 데이터용 2Gi 스토리지
+* **Deployment**: Open WebUI 컨테이너
+* **Service**: 클러스터 내부에서 접근하기 위한 8080 포트
+* **Route**: 브라우저에서 접근하기 위한 외부 HTTPS URL
 
-`NAMESPACE` 변수가 설정되어 있고 워크숍 리포지토리 디렉터리에 있는지 확인한 후 배포합니다:
+``NAMESPACE`` 변수가 설정되어 있고 현재 위치가 워크숍 리포지토리 디렉터리인지 확인한 후 배포합니다.
 
 [source,sh,role="execute"]
 ----
 sed "s/\${NAMESPACE}/$NAMESPACE/g" manifests/open-webui.yaml | oc apply -f -
 ----
 
-== 단계 4.5: Open WebUI 대기
+== 단계 4.5: Open WebUI 배포 완료 대기
 
 [source,sh,role="execute"]
 ----
 oc rollout status deployment/open-webui -n $NAMESPACE --timeout=120s
 ----
+
+``deployment "open-webui" successfully rolled out``이 출력되면 배포가 완료된 것입니다.
 
 == 단계 4.6: Open WebUI URL 확인
 
@@ -64,7 +66,7 @@ oc rollout status deployment/open-webui -n $NAMESPACE --timeout=120s
 echo "https://$(oc get route open-webui -n $NAMESPACE -o jsonpath='{.spec.host}')"
 ----
 
-OpenShift Console에서도 URL을 확인할 수 있습니다: *Networking* > *Routes* > `open-webui`.
+OpenShift Console에서도 URL을 확인할 수 있습니다. 본인의 프로젝트를 선택한 후 **Networking** > **Routes** > `open-webui`로 이동합니다.
 
 image::openwebui/img-ocp-route-openwebui.png[OpenShift Console에 표시된 Open WebUI 경로]
 
@@ -72,4 +74,4 @@ image::openwebui/img-ocp-route-openwebui.png[OpenShift Console에 표시된 Open
 
 image::openwebui/img-openwebui-default.png[Open WebUI 기본 랜딩 페이지]
 
-Open WebUI가 실행되면, 모듈 5에서 MaaS API 키를 설정한 후 모듈 6에서 모델을 연결합니다.
+Open WebUI가 실행되면, 모듈 5에서 MaaS API 키를 생성한 후 모듈 6에서 모델을 연결합니다.
