@@ -7,10 +7,11 @@
 
 == 단계 6.1: 모델 URL 확인
 
-모델 엔드포인트 URL은 CLI 또는 대시보드 UI에서 확인할 수 있습니다.
-본인의 네임스페이스를 설정합니다. `user-XX` 부분을 본인의 네임스페이스로 변경한 후 실행합니다(예: `user-05`).
+모델 엔드포인트 URL은 Web Terminal 또는 대시보드 UI에서 확인할 수 있습니다.
 
 *방법 A: Web Terminal*
+
+본인의 네임스페이스를 설정합니다. `user-XX` 부분을 본인의 네임스페이스로 변경한 후 실행합니다(예: `user-05`).
 
 [source,sh,role="execute"]
 ----
@@ -35,78 +36,80 @@ echo "$(oc get llminferenceservice <모델명> -n $NAMESPACE -o jsonpath='{.stat
 ----
 ====
 
-
 *방법 B: 대시보드 UI*
 
 **AI hub** > **Models** > **Deployments**로 이동하여 본인의 프로젝트를 선택한 후, 모델 옆의 **Internal and external endpoint**를 클릭하여 외부 URL을 확인합니다. URL 끝에 ``/v1``을 추가합니다.
 
 image::model-deployment/img-model-deployment-endpoint.png[외부 URL이 표시된 추론 엔드포인트 팝업]
 
-이 URL을 복사하고, 다음 단계에서 붙여넣기 합니다.
+이 URL을 복사하여 다음 단계에서 붙여넣습니다.
 
 == 단계 6.2: Open WebUI에서 연결 추가
 
-[start=1]
-. Open WebUI에서 좌측 하단의 *프로필 아이콘*을 클릭한 후 *Admin Panel*을 클릭합니다.
+. Open WebUI에서 좌측 하단의 **프로필 아이콘**을 클릭한 후 **Admin Panel**을 클릭합니다.
 +
 image::openwebui/img-openwebui-admin-panel.png[Admin Panel이 강조 표시된 Open WebUI 프로필 메뉴]
 
-. *Settings*를 클릭한 후 좌측 사이드바에서 *Connections*를 클릭합니다.
+. **Settings**를 클릭한 후 좌측 사이드바에서 **Connections**를 클릭합니다.
 +
 image::openwebui/img-openwebui-settings.png[Connections 페이지가 표시된 Admin Settings]
 
-. 우측 상단의 *Add Connection*을 클릭합니다.
+. 우측 상단의 **Add Connection**을 클릭합니다.
 +
 image::openwebui/img-openwebui-addconnection.png[Connections 페이지의 Add Connection 버튼]
 
-. *URL* 필드에 단계 6.1에서 확인한 모델 엔드포인트 URL을 붙여넣습니다. URL이 `/v1`로 끝나는지 확인합니다. *API Key* 필드에 모듈 5에서 생성한 *Premium* API 키(`apikey-premium`)를 붙여넣습니다. *Prefix ID*를 `PREMIUM`으로 설정하여 모델 드롭다운에서 이 연결을 구분할 수 있도록 합니다.
+. 연결 정보를 다음과 같이 입력합니다.
++
+--
+* **URL**: 단계 6.1에서 확인한 모델 엔드포인트 URL을 붙여넣습니다. URL이 ``/v1``로 끝나는지 확인합니다.
+* **API Key**: 모듈 5에서 생성한 **Premium** API 키(`apikey-premium`)를 붙여넣습니다.
+* **Prefix ID**: ``PREMIUM``으로 설정합니다. 모델 드롭다운에서 이 연결을 구분하는 데 사용됩니다.
+--
 +
 image::openwebui/img-openwebui-modelendpoint-premium.png[URL, API 키, PREMIUM 접두사가 설정된 Premium 연결]
 +
-IMPORTANT: URL은 반드시 `/v1`로 끝나야 합니다 (예: `https://maas.apps.<cluster>/user-XX/<model-name>/v1`). MaaS 게이트웨이를 통한 인증에 API 키가 필요합니다.
+IMPORTANT: URL은 반드시 ``/v1``로 끝나야 합니다(예: `https://maas.apps.<cluster>/user-XX/<model-name>/v1`). MaaS 게이트웨이를 통과하려면 API 키가 필요합니다.
 
-. *Save*를 클릭합니다. 연결이 *녹색 토글*로 표시되어야 합니다 -- 이는 Open WebUI가 모델에 성공적으로 연결하여 모델을 검색했음을 의미합니다.
+. **Save**를 클릭합니다. 연결이 **녹색 토글**로 표시되어야 합니다. 이는 Open WebUI가 모델에 성공적으로 연결하여 모델 목록을 가져왔음을 의미합니다.
 
-. 동일한 과정을 반복합니다: *Add Connection*을 다시 클릭합니다. 동일한 URL을 사용하되, 이번에는 *Basic* API 키(`apikey-basic`)를 붙여넣습니다. *Prefix ID*를 `BASIC`으로 설정합니다.
+. **Add Connection**을 다시 클릭하여 같은 과정을 반복합니다. URL은 동일하게 입력하고, **API Key**에는 **Basic** API 키(`apikey-basic`)를, **Prefix ID**에는 ``BASIC``을 입력합니다.
 +
 image::openwebui/img-openwebui-modelendpoint-basic.png[URL, API 키, BASIC 접두사가 설정된 Basic 연결]
 
-. *Save*를 클릭합니다. 이제 두 개의 연결이 모두 녹색 토글로 표시되어야 합니다.
+. **Save**를 클릭합니다. 이제 두 개의 연결이 모두 녹색 토글로 표시되어야 합니다.
 +
 [TIP]
 ====
-토글이 빨간색인 경우, URL과 API 키를 다시 확인하십시오. 모듈 5에서 생성한 MaaS 구독이 *Ready* 상태인지 확인합니다.
+토글이 빨간색인 경우 URL과 API 키를 다시 확인하십시오. 또한 모듈 5에서 생성한 MaaS 구독이 **Ready** 상태인지 확인합니다.
 ====
 
-이제 서로 다른 속도 제한을 가진 두 개의 연결이 설정되었습니다. 채팅 드롭다운에서 모델이 `PREMIUM` 또는 `BASIC` 접두사와 함께 표시되어 토큰 속도 제한의 차이를 테스트할 수 있습니다.
+이제 서로 다른 토큰 속도 제한을 가진 두 개의 연결이 설정되었습니다. 채팅 화면의 모델 드롭다운에 ``PREMIUM``과 ``BASIC`` 접두사가 붙은 모델이 각각 표시되므로, 두 연결의 속도 제한 차이를 비교해 볼 수 있습니다.
 
 == 단계 6.3: 모델 연결 확인
 
-메인 채팅 페이지로 돌아갑니다. 상단의 모델 드롭다운을 클릭하면 `PREMIUM`과 `BASIC` 접두사가 붙은 모델이 모두 표시되어야 합니다.
+메인 채팅 페이지로 돌아갑니다. 상단의 모델 드롭다운을 클릭하면 ``PREMIUM``과 ``BASIC`` 접두사가 붙은 모델이 모두 표시되어야 합니다.
 
 image::openwebui/img-openwebui-connectedmodels.png[PREMIUM과 BASIC 연결이 표시된 모델 드롭다운]
 
 === Premium으로 테스트
 
-[start=1]
-. 드롭다운에서 `PREMIUM.redhataigemma-4-e4b-it`을 선택합니다.
-. 긴 프롬프트를 전송합니다 (예: `give me a funny joke. make it long and at least 500 words in length`).
-. Premium 구독은 `10,000` 토큰/분의 속도 제한이 있으므로 모델이 중단 없이 전체 응답을 생성합니다.
+. 드롭다운에서 ``PREMIUM.redhataigemma-4-e4b-it``을 선택합니다.
+. 긴 프롬프트를 전송합니다(예: `give me a funny joke. make it long and at least 500 words in length`).
+. Premium 구독은 분당 `10,000` 토큰의 속도 제한이 있으므로 모델이 중단 없이 전체 응답을 생성합니다.
 +
 image::openwebui/img-openwebui-testchat-premium.png[속도 제한 없이 긴 응답을 생성하는 Premium 연결]
 
 === Basic으로 테스트
 
-[start=1]
-. 드롭다운에서 `BASIC.redhataigemma-4-e4b-it`을 선택합니다.
-. 유사한 긴 프롬프트를 전송합니다.
-. Basic 구독은 `100` 토큰/분의 속도 제한이 있으므로 응답이 더 짧거나 잘릴 수 있습니다.
+. 드롭다운에서 ``BASIC.redhataigemma-4-e4b-it``을 선택합니다.
+. 비슷한 긴 프롬프트를 두세 번 연속으로 전송합니다.
+. Basic 구독은 분당 `100` 토큰의 속도 제한이 있으므로, 한도를 넘으면 요청이 거부되고 오류(`429 Too Many Requests`)가 표시됩니다.
 +
 image::openwebui/img-openwebui-testchat-basic.png[속도가 제한된 Basic 연결의 응답]
 
 이를 통해 MaaS 구독이 API 키별로 서로 다른 토큰 속도 제한을 적용하여, 사용자 그룹에 따라 계층화된 접근을 구현하는 방식을 확인할 수 있습니다.
 
-추론 파이프라인:
+추론 파이프라인은 다음과 같습니다.
 
 [source,text]
 ----
