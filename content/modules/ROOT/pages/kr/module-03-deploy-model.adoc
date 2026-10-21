@@ -1,69 +1,69 @@
 :imagesdir: ../../assets/images
 
 [#deploy-model-kr]
-= 모델 카탈로그 개요
+= 모델 배포
 
-이 모듈에서는 모델 카탈로그에서 vLLM 서빙 런타임(기본 제공)을 사용하여 AI 모델을 배포합니다.
+이 모듈에서는 모델 카탈로그에서 모델을 선택하고, llm-d 기반의 LLM inference service로 배포한 뒤 MaaS로 게시합니다.
 
-카탈로그의 모델은 OCI 컨테이너 이미지로 패키징되어 Red Hat 레지스트리에서 가져오므로 출처가 보장되며 S3 저장소 자격 증명이 필요하지 않습니다.
+카탈로그의 모델은 OCI 컨테이너 이미지로 패키징되어 Red Hat 레지스트리에서 가져오므로 출처가 보장되며, S3 저장소 자격 증명이 필요하지 않습니다.
 
-카탈로그를 탐색하려면 좌측 사이드바에서 *AI hub* > *Models*로 이동한 후 *Catalog* 탭을 선택합니다. 모델 이름, 작업 유형 또는 검증 상태별로 검색 및 필터링할 수 있습니다.
+카탈로그를 탐색하려면 좌측 사이드바에서 **AI hub** > **Models**로 이동한 후 **Catalog** 탭을 선택합니다. 모델 이름, 작업 유형 또는 검증 상태별로 검색하고 필터링할 수 있습니다.
 
 image::model-deployment/img-model-catalog.png[OpenShift AI 모델 카탈로그]
 
 == 단계 3.1: 모델 검색
 
-모델 카탈로그의 검색창에서 `gemma-4-E4B`를 검색합니다. *gemma-4-E4B-it* 모델 카드를 선택합니다. 본 실습에서는 이 모델을 배포합니다.
+모델 카탈로그의 검색창에서 ``gemma-4-E4B``를 검색한 후 **gemma-4-E4B-it** 모델 카드를 선택합니다. 이 실습에서는 이 모델을 배포합니다.
 
 image::model-deployment/img-gemma4-model.png[모델 카탈로그에서 gemma-4-E4B 검색]
 
-모델을 클릭하면 모델 카드가 열립니다. 모델 카드에는 모델 설명, 기능, 벤치마크 데이터가 표시되며, 우측의 *Model details* 아래에 OCI 레지스트리 주소가 포함된 *Model location* 필드가 있습니다. 이 URI가 배포 시 사용됩니다.
+모델을 클릭하면 모델 카드가 열립니다. 모델 카드에는 모델 설명, 기능, 벤치마크 데이터가 표시되며, 우측의 **Model details** 아래에 OCI 레지스트리 주소가 담긴 **Model location** 필드가 있습니다. 이 URI가 배포 시 사용됩니다.
 
 image::model-deployment/img-gemma4-model-card.png[Red Hat 레지스트리의 모델 위치가 표시된 Gemma 4 모델 카드]
 
-== 단계 3.2: 모델 배포
+== 단계 3.2: 모델 배포 시작
 
-모델 카드 우측 상단의 *Deploy model* 버튼을 클릭합니다.
+모델 카드 우측 상단의 **Deploy model** 버튼을 클릭합니다.
 
 image::model-deployment/img-deploy-gemma4-model.png[Gemma 4 모델 카드의 Deploy model 버튼]
 
-*Deploy a model* 마법사가 열립니다. 첫 번째 단계(*Preconfigure deployment*)에서 *Project* 드롭다운에서 본인의 프로젝트(`user-XX`)를 선택한 후 *Next*를 클릭합니다.
+**Deploy a model** 마법사가 열립니다. 첫 번째 단계(**Preconfigure deployment**)의 **Project** 드롭다운에서 본인의 프로젝트(`user-XX`)를 선택한 후 **Next**를 클릭합니다.
 
 image::model-deployment/img-model-deployment-form-1.png[배포 마법사에서 프로젝트 선택]
 
-== 단계 3.3: 마법사 2단계 -- 모델 세부 정보
+== 단계 3.3: 마법사 2단계 - 모델 세부 정보
 
-모델 카탈로그에서 배포를 시작했으므로 모델 세부 정보가 자동으로 입력되어 있습니다. URI, 모델 이름, 모델 유형이 모두 자동으로 가져와집니다. 모든 항목을 그대로 두고 *Next*를 클릭합니다.
+모델 카탈로그에서 배포를 시작했으므로 URI, 모델 이름, 모델 유형이 모두 자동으로 입력되어 있습니다. 모든 항목을 그대로 두고 **Next**를 클릭합니다.
 
 image::model-deployment/img-model-deployment-form-2.png[모델 카탈로그에서 자동 입력된 모델 세부 정보]
 
-== 단계 3.4: 마법사 3단계 -- 모델 배포 설정
+== 단계 3.4: 마법사 3단계 - 모델 배포 설정
 
-배포 설정을 구성합니다. 확인해야 할 주요 필드는 다음과 같습니다:
+배포 설정을 구성합니다. 확인해야 할 주요 필드는 다음과 같습니다.
 
 [cols="1,2",options="header"]
 |===
 | 필드 | 선택 또는 입력 내용
 
-| *Model deployment name*
+| **Model deployment name**
 | 자동 입력됨 (예: `RedHatAI/gemma-4-E4B-it`)
 
-| *Deployment method*
-| *LLM inference service with llm-d* 선택
+| **Deployment method**
+| **LLM inference service with llm-d** 선택
 
-| *Topology type*
+| **Topology type**
 | `Single node`
 
-| *Topology configuration*
+| **Topology configuration**
 | `Single node (default)`
 
-| *Hardware profile*
+| **Hardware profile**
 | `gpu-profile` 선택 (또는 관리자가 제공한 GPU 프로파일)
 
-| *Routing*
+| **Routing**
 | `Default optimized routing`
 
-| *Replica count*
+| **Replica count**
 | `1`
 |===
 
@@ -71,84 +71,83 @@ image::model-deployment/img-model-deployment-form-3-1.png[모델 배포 이름 �
 
 image::model-deployment/img-model-deployment-form-3-2.png[토폴로지, Hardware Profile, 라우팅 및 복제본 수 설정]
 
-*Next*를 클릭하여 진행합니다.
+**Next**를 클릭하여 진행합니다.
 
-== 단계 3.5: 마법사 4단계 -- 고급 설정
+== 단계 3.5: 마법사 4단계 - 고급 설정
 
-이 단계에서는 모델 가용성 및 접근 방식을 구성합니다.
+이 단계에서는 모델 가용성과 접근 방식을 구성합니다.
 
 [cols="1,2",options="header"]
 |===
 | 설정 | 수행 내용
 
-| *Add as AI asset endpoint*
+| **Add as AI asset endpoint**
 | 선택하지 않습니다
 
-| *Publish as MaaS*
-| 이 확인란을 선택합니다 (게이트웨이 API를 통해 모델에 접근 가능)
+| **Publish as MaaS**
+| 이 확인란을 선택합니다 (MaaS 게이트웨이를 통해 모델에 접근 가능)
 
-| *Gateway*
+| **Gateway**
 | `maas-default-gateway \| openshift-ingress` 선택
 |===
 
-본 실습에서는 *Token authentication*, *Add custom runtime arguments*, *Add custom runtime environment variables*는 선택하지 않습니다.
+이 실습에서는 **Token authentication**, **Add custom runtime arguments**, **Add custom runtime environment variables**를 선택하지 않습니다.
 
-image::model-deployment/img-model-deployment-form-4.png[AI asset endpoint 및 MaaS가 활성화된 고급 설정]
+image::model-deployment/img-model-deployment-form-4.png[MaaS 게시가 선택된 고급 설정]
 
-*Next*를 클릭하여 진행합니다.
+**Next**를 클릭하여 진행합니다.
 
-== 단계 3.6: 마법사 5단계 -- 검토 및 배포
+== 단계 3.6: 마법사 5단계 - 검토 및 배포
 
-구성 요약을 검토합니다. 주요 설정을 확인합니다:
+구성 요약에서 다음 주요 설정을 확인합니다.
 
-* *Model location:* URI
-* *Location details:* `oci://registry.redhat.io/rhai/modelcar-redhatai-gemma-4-e4b-it:3.0`
-* *Hardware profile:* gpu-profile
-* *Deployment method:* LLM inference service with llm-d
-* *Topology:* Single node
-* *Replicas:* 1
-* *AI asset endpoint:* No
-* *MaaS endpoint:* Yes
-* *Gateway:* maas-default-gateway | openshift-ingress
+* **Model location:** URI
+* **Location details:** `oci://registry.redhat.io/rhai/modelcar-redhatai-gemma-4-e4b-it:3.0`
+* **Hardware profile:** gpu-profile
+* **Deployment method:** LLM inference service with llm-d
+* **Topology:** Single node
+* **Replicas:** 1
+* **AI asset endpoint:** No
+* **MaaS endpoint:** Yes
+* **Gateway:** maas-default-gateway | openshift-ingress
 
 image::model-deployment/img-model-deployment-form-5.png[배포 요약이 표시된 검토 페이지]
 
-*Deploy model*을 클릭하여 배포를 시작합니다.
+**Deploy model**을 클릭하여 배포를 시작합니다.
 
 == 단계 3.7: 배포 상태 모니터링
 
-Deploy를 클릭하면 Deployments 탭으로 이동합니다. 모델 옆의 상태 표시기를 확인합니다:
+**Deploy model**을 클릭하면 **Deployments** 탭으로 이동합니다. 모델 옆의 상태 표시를 확인합니다.
 
-image::model-deployment/img-model-deployment-pending.png[Starting/Pending 상태의 모델 배포]
+image::model-deployment/img-model-deployment-pending.png[Starting 상태의 모델 배포]
 
 [cols="1,2",options="header"]
 |===
 | 상태 | 의미
 
-| *Starting*
+| **Starting**
 | 컨테이너 이미지를 가져오고 모델을 로딩하는 중입니다
 
-| *Ready*
+| **Ready**
 | 모델이 요청을 처리할 준비가 되었습니다
 
-| *Failed*
+| **Failed**
 | 오류가 발생했습니다 (이벤트를 확인하십시오)
 |===
 
 == 단계 3.8: 모델 실행 확인
 
-상태가 *Ready* (녹색)로 표시되면 모델이 배포되어 요청을 처리하고 있습니다.
+상태가 **Ready**(녹색)로 표시되면 모델이 배포되어 요청을 처리할 수 있는 상태입니다.
 
 image::model-deployment/img-model-deployment-ready.png[Ready 상태가 표시된 모델 배포]
 
-NOTE: *Projects* > _(본인 프로젝트)_ > *Deployments*에서도 이 페이지에 접근할 수 있습니다.
+NOTE: **Projects** > _(본인 프로젝트)_ > **Deployments**에서도 이 페이지에 접근할 수 있습니다.
 
-. 모델 이름 좌측의 확장 화살표(*>*)를 클릭하여 배포 세부 정보를 확인합니다.
-
-. *Internal and external endpoint*를 클릭하여 외부 추론 URL을 확인합니다.
-
+. 모델 이름 좌측의 확장 화살표(**>**)를 클릭하여 배포 세부 정보를 확인합니다.
+. **Internal and external endpoint**를 클릭하여 외부 추론 URL을 확인합니다.
++
 image::model-deployment/img-model-deployment-endpoint.png[외부 URL이 표시된 추론 엔드포인트 팝업]
 
-. *External* 아래에 표시된 외부 경로 URL인 *Inference endpoint URL*을 복사합니다. 옆의 복사 아이콘을 클릭합니다.
+. **External** 아래에 표시된 외부 URL 옆의 복사 아이콘을 클릭하여 복사합니다.
 
-IMPORTANT: 이 URL을 보관하십시오. 이후 모듈에서 `MODEL_URL`로 필요합니다.
+NOTE: 이 URL은 모듈 6에서 Open WebUI에 모델을 연결할 때 사용합니다. 모듈 6에서 명령어나 대시보드로 다시 확인할 수 있으므로 지금 따로 저장하지 않아도 됩니다.
