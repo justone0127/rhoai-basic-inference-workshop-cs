@@ -93,7 +93,7 @@ image::maas-setup/img-maas-governance.png[Subscriptions 탭이 표시된 MaaS go
 | `20`
 
 | **Groups**
-| `rhods-admins` 선택 (또는 강사가 제공한 그룹)
+| `students` 선택 (또는 강사가 제공한 그룹)
 
 | **Models**
 | **Add models**를 클릭하여 배포된 모델을 선택합니다
@@ -138,7 +138,7 @@ image::maas-setup/img-maas-subs-5.png[제출 준비가 완료된 구독 양식]
 | `10`
 
 | **Groups**
-| `rhods-admins` 선택 (또는 Premium과 동일한 그룹)
+| `students` 선택 (또는 Premium과 동일한 그룹)
 
 | **Models**
 | Premium과 동일한 배포된 모델을 선택합니다
