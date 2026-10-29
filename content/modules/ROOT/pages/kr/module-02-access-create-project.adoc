@@ -9,7 +9,7 @@
 
 . 웹 브라우저를 엽니다(Chrome 또는 Firefox 권장).
 . 강사가 제공한 **OpenShift AI 대시보드 URL**로 이동합니다.
-. 배정받은 사용자명(예: `user01`)과 비밀번호를 입력합니다.
+. 배정받은 사용자명(예: `user1`)과 비밀번호를 입력합니다.
 +
 image::ocp-rhoai-portal/img-user-login.png[로그인,600]
 
