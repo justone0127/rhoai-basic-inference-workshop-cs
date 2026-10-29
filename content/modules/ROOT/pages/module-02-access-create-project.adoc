@@ -12,7 +12,7 @@ In this module, you will log in to the {productname-long} dashboard and create a
 . You will be redirected to a login page. Select *htpasswd* as the login provider.
 +
 image::ocp-rhoai-portal/img-htpasswd-login.png[Login page showing htpasswd provider,600]
-. Enter your assigned username (e.g. `user01`) and password.
+. Enter your assigned username (e.g. `user1`) and password.
 . Click *Log in*.
 
 You should now see the *OpenShift AI Dashboard* with a left sidebar showing menu items such as Projects, AI hub, Gen AI studio, and more.
@@ -47,7 +47,7 @@ A project (also known as a Kubernetes namespace) is your workspace where you wil
 
 . Fill in the form:
 +
-[cols="1,2",options="header"]
+[cols="1,2",options="header"]f
 |===
 | Field | What to Enter
 
