@@ -157,7 +157,7 @@ image::mcp-servers/img-playground-pnu-5.png[MCP Server 저장]
 +
 최종 답변에 관련 전공 과목, 학점, 시간이 나오면 성공입니다.
 +
-image::mcp-servers/img-playground-pnu-6[MCP Server를 이용한 채팅 결과]
+image::mcp-servers/img-playground-pnu-6.png[MCP Server를 이용한 채팅 결과]
 
 . 학과 교육과정에 관한 질문을 더 해 봅니다.
 +
