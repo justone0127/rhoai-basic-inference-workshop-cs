@@ -72,7 +72,9 @@ image::maas-setup/img-maas-endpoints-3.png[Web Terminal에서 조회한 모델 U
 | 일반 사용자 (예: 워크숍 참가자)
 |===
 
-사용자가 여러 그룹에 속해 있을 때는 우선순위가 높은 구독이 기본으로 적용됩니다.
+사용자가 여러 구독에 해당할 때, API 키를 만들면서 구독을 지정하지 않으면 우선순위가 높은 구독이 기본으로 선택됩니다. 이 실습에서는 API 키를 만들 때 구독을 직접 선택하므로 우선순위의 영향은 없습니다.
+
+NOTE: 구독과 API 키 이름의 ``xx``는 본인 번호로 바꿉니다(예: ``user-05-workshop-gemma4-premium``).
 
 === Premium 구독 생성
 
@@ -111,7 +113,7 @@ image::maas-setup/img-maas-subs-multi-1.png[이름, 우선순위, 그룹이 입�
 +
 image::maas-setup/img-maas-subs-multi-2.png[배포된 모델이 표시된 모델 추가 대화 상자]
 
-. 모델을 추가한 후, 모델 항목 옆의 **Add token limit**를 클릭합니다.
+. 모델을 추가한 후, 모델 항목 옆의 **Add token limit**을 클릭합니다.
 +
 image::maas-setup/img-maas-subs-multi-3.png[Add token limit이 표시된 추가된 모델]
 
@@ -216,4 +218,8 @@ IMPORTANT: 이 API 키를 안전하게 저장하십시오. 이 대화 상자를 
 
 image::maas-setup/img-apikey-multi-4.png[Basic 구독에 대한 API 키 생성 대화 상자]
 
-이 키도 복사하여 저장합니다. 이제 서로 다른 속도 제한을 가진 두 개의 API 키가 준비되었으며, 모듈 6에서 Open WebUI에 연결하는 데 사용합니다.
+이 키도 복사하여 저장합니다. 키는 ``sk-oai-``로 시작하며 한 번만 표시됩니다.
+
+image::maas-setup/img-apikey-multi-5.png[Basic 구독에 대한 API 키 생성 완료]
+
+이제 서로 다른 속도 제한을 가진 두 개의 API 키가 준비되었으며, 모듈 6에서 Open WebUI에 연결하는 데 사용합니다.
