@@ -150,7 +150,7 @@ image::maas-setup/img-maas-subs-multi-5.png[제출 준비가 완료된 구독 �
 | 선택된 상태로 유지합니다
 |===
 
-image::maas-setup/img-maas-subs-multi-5.png[이름, 우선순위, 그룹, 모델, 토큰 제한이 입력된 Basic 구독 양식]
+image::maas-setup/img-maas-subs-basic-multi.png[이름, 우선순위, 그룹, 모델, 토큰 제한이 입력된 Basic 구독 양식]
 
 두 구독을 모두 생성하면 **Subscriptions** 탭에 ``user-xx-workshop-gemma4-premium``과 ``user-xx-workshop-gemma4-basic`` 두 항목이 모두 **Ready** 상태로 표시되어야 합니다.
 
