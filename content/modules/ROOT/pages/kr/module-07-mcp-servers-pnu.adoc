@@ -13,7 +13,9 @@
 
 == 단계 7.1: 사전 배포된 MCP 서버 확인
 
-이번 실습에서 사용할 MCP 서버는 클러스터의 `mcp-servers` 프로젝트에 미리 배포되어 있습니다. 이 서버는 인공지능공학전공 교육과정 데이터(61개 과목)를 읽어 다음과 같은 도구를 제공합니다.
+이번 실습에서 사용할 MCP 서버는 클러스터의 `mcp-servers` 프로젝트에 미리 배포되어 있습니다. 클러스터에는 **정보컴퓨터공학부**와 **인공지능학전공** 교육과정 MCP 서버가 함께 등록되어 있으며, 이 가이드에서는 정보컴퓨터공학부 MCP 서버(`pnu-cse-curriculum-mcp`)를 기준으로 실습합니다.
+
+정보컴퓨터공학부 MCP 서버는 학과 교육과정 데이터를 읽어 다음과 같은 도구를 제공합니다.
 
 * `list_courses`: 학년, 학기, 이수구분 등의 조건으로 과목 목록을 조회합니다.
 * `credit_summary`: 조건에 맞는 과목의 학점 합계를 계산합니다.
@@ -29,9 +31,9 @@ oc get configmap gen-ai-aa-mcp-servers -n redhat-ods-applications \
   -o jsonpath='{.data.pnu-cse-curriculum-mcp}' | jq .
 ----
 +
-출력된 ``url``이 ``mcp-servers`` 프로젝트의 ``pnu-cse-curriculum-mcp`` 서비스 주소(``http://pnu-cse-curriculum-mcp.mcp-servers.svc.cluster.local:8000/mcp``)인지 확인합니다.
+출력된 ``url``이 ``mcp-servers`` 프로젝트의 ``pnu-cse-curriculum-mcp`` 서비스 주소(``+http://pnu-cse-curriculum-mcp.mcp-servers.svc.cluster.local:8000/mcp+``)인지 확인합니다.
 
-. 대시보드에서 **Gen AI studio** > **AI asset endpoints**로 이동하여, **MCP servers** 목록에 ``Curriculum-MCP-Server``가 표시되는지 확인합니다. 항목의 **View**를 클릭하면 등록된 URL을 확인할 수 있습니다.
+. 대시보드에서 **Gen AI studio** > **AI asset endpoints**로 이동하여, **MCP servers** 목록에 두 학과의 MCP 서버가 표시되는지 확인합니다. 이 실습에서는 정보컴퓨터공학부 서버인 ``pnu-cse-curriculum-mcp``를 사용합니다. 항목의 **View**를 클릭하면 등록된 URL을 확인할 수 있습니다.
 +
 image::mcp-servers/img-mcp-servers-pnu-1.png[AI asset endpoints에 표시된 pnu-cse-curriculum-mcp]
 
@@ -67,6 +69,14 @@ image::mcp-servers/img-mcp-servers-2.png[배포된 모델의 메뉴에서 Edit �
 +
 image::mcp-servers/img-mcp-servers-3.png[Tool Calling 기능 활성화]
 
+. 모델을 정지(Stop)하고, 완전히 정지된 것을 확인합니다.
++
+image::mcp-servers/img-mcp-servers-5.png[모델 정지 확인]
+
+. 시작(Start)을 클릭하여, 모델을 재기동합니다.
++
+image::mcp-servers/img-mcp-servers-6.png[모델 시작]
+
 . 모델 재배포가 완료될 때까지 기다립니다. 다음과 같이 **Running** 상태로 표시되면 다음 단계를 진행할 수 있습니다.
 +
 image::mcp-servers/img-mcp-servers-4.png[모델 배포 확인]
@@ -81,9 +91,9 @@ Playground는 OpenShift AI에서 제공하는 대화형 테스트 환경으로, 
                      │  ① 질문 + MCP 도구 목록 전달
                      ▼
                   모델 (Gemma)
-                     │  ② "list_courses(grade=1, semester=1, category='전공필수')를 호출해 줘"
+                     │  ② "list_courses(grade=3, semester=1, category='전공필수')를 호출해 줘"
                      ▼
-                 Playground ──③ 도구 실행──▶ MCP 서버 (curriculum-mcp)
+                 Playground ──③ 도구 실행──▶ MCP 서버 (pnu-cse-curriculum-mcp)
                      │  ④ 실행 결과를 모델에 다시 전달
                      ▼
                   모델 ──⑤ 결과를 근거로 최종 답변 생성──▶ 사용자
@@ -130,9 +140,9 @@ image::mcp-servers/img-playground-pnu-3-1.png[MCP 없이 교육과정을 질문�
 
 === MCP 서버 연결
 
-. 오른쪽 설정 패널의 **MCP servers** 영역에서 ``Curriculum-MCP-Server``를 찾아 활성화합니다.
+. 오른쪽 설정 패널의 **MCP servers** 영역에서 정보컴퓨터공학부 서버인 ``pnu-cse-curriculum-mcp``만 활성화합니다. 인공지능학전공 MCP 서버는 비활성화 상태로 둡니다.
 +
-image::mcp-servers/image-playground-pnu-4.png[MCP Server 활성화]
+image::mcp-servers/img-playground-pnu-4.png[MCP Server 활성화]
 
 . **저장**을 클릭합니다.
 +
@@ -192,7 +202,7 @@ TIP: 마지막 질문은 일부러 데이터에 없는 정보를 묻는 질문�
 
 | 답변 근거
 | 모델이 학습한 일반 지식
-| MCP 도구가 조회한 실제 교육과정 데이터
+| MCP 도구가 조회한 정보컴퓨터공학부 교육과정 데이터
 
 | 정확도
 | 모르거나 사실과 다른 내용을 지어냄
