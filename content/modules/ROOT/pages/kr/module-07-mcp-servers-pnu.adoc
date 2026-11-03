@@ -190,9 +190,7 @@ image::mcp-servers/img-playground-pnu-8.png[MCP Server를 이용한 채팅 결�
 졸업하려면 몇 학점이 필요해?
 ----
 +
-image::mcp-servers/img-playground-pnu-9.png[MCP Server를 이용한 채팅 결과 4]
-
-TIP: 마지막 질문은 일부러 데이터에 없는 정보를 묻는 질문입니다. 모델이 "데이터에 없다"고 답하는지, 아니면 개설 과목의 학점 합계를 졸업 학점으로 착각해 답하는지 확인해 보세요.
+image::mcp-servers/img-playground-pnu-10.png[MCP Server를 이용한 채팅 결과 4]
 
 === 결과 비교
 
