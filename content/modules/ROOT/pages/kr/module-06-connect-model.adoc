@@ -95,7 +95,7 @@ image::openwebui/img-openwebui-connectedmodels.png[PREMIUM과 BASIC 연결이 �
 
 . 드롭다운에서 ``PREMIUM.redhataigemma-4-e4b-it``을 선택합니다.
 . 긴 프롬프트를 전송합니다(예: `give me a funny joke. make it long and at least 500 words in length`).
-. Premium 구독은 분당 `10,000` 토큰의 속도 제한이 있으므로 모델이 중단 없이 전체 응답을 생성합니다.
+. Premium 구독은 분당 `90,000` 토큰의 속도 제한이 있으므로 모델이 중단 없이 전체 응답을 생성합니다.
 +
 image::openwebui/img-openwebui-testchat-premium.png[속도 제한 없이 긴 응답을 생성하는 Premium 연결]
 
@@ -103,7 +103,7 @@ image::openwebui/img-openwebui-testchat-premium.png[속도 제한 없이 긴 응
 
 . 드롭다운에서 ``BASIC.redhataigemma-4-e4b-it``을 선택합니다.
 . 비슷한 긴 프롬프트를 두세 번 연속으로 전송합니다.
-. Basic 구독은 분당 `100` 토큰의 속도 제한이 있으므로, 한도를 넘으면 요청이 거부되고 오류(`429 Too Many Requests`)가 표시됩니다.
+. Basic 구독은 분당 `1,000` 토큰의 속도 제한이 있으므로, 한도를 넘으면 요청이 거부되고 오류(`429 Too Many Requests`)가 표시됩니다.
 +
 image::openwebui/img-openwebui-testchat-basic.png[속도가 제한된 Basic 연결의 응답]
 
